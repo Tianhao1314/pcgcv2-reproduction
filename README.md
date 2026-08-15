@@ -10,10 +10,23 @@ A reproduction of **PCGCv2** (*Multiscale Point Cloud Geometry Compression*, Wan
 > **not** include the PCGCv2 source code. To run PCGCv2, clone the
 > [original repository](https://github.com/NJUVISION/PCGCv2) directly.
 
+**Where this sits.** PCGCv2 is the multiscale sparse-tensor foundation that the learned
+point cloud coding line is built on, and reproducing it was the groundwork for my ongoing
+master's thesis on point cloud *attribute* compression (FAU LMS, submission December 2026).
+That later work is separate and not in this repository. This one remains what it says above:
+a reproduction study, not original research.
+
 The goal of the exercise was the **"reproduce the paper's metrics"** level of reproduction:
 not merely getting the code to run, but obtaining bpp / D1 PSNR / D2 PSNR on the same
 8iVFB dataset, drawing the rate–distortion curves, and checking them against the authors'
 officially published results.
+
+## Updates
+
+<!-- New entries go to the TOP. Old entries are NEVER modified.
+     Date format: YYYY-MM-DD. -->
+
+- **2026-08-15** — Cross-linked the evaluation and corpus tooling. The BD-rate and RD-curve arithmetic used here is now available as a standalone package, pcc-eval-toolkit, which also adds bit-exact round-trip verification. Corpus-side occupancy statistics live in pcc-corpus-probe. Added a positioning note connecting this reproduction to the ongoing attribute-compression thesis; the reproduction results and their limitations are unchanged.
 
 ## Original work
 
@@ -120,6 +133,19 @@ pcgcv2-reproduction/
 │   └── glossary-with-examples.md
 └── logs/          training_epoch1-18.log — raw log from the from-scratch training run
 ```
+
+## Related repositories
+
+Tooling that came out of this reproduction and the work that followed it:
+
+- [pcc-eval-toolkit](https://github.com/Tianhao1314/pcc-eval-toolkit) — BD-rate / BD-PSNR,
+  RD curves and MPEG-CTC-style reporting, plus codec-agnostic bit-exact round-trip
+  verification. The RD arithmetic behind the curves above, packaged and tested. Contains no
+  codec.
+- [pcc-corpus-probe](https://github.com/Tianhao1314/pcc-corpus-probe) — multiscale occupancy
+  statistics for point cloud corpora, and a measure of how far apart two corpora sit.
+- [pcc-notes](https://github.com/Tianhao1314/pcc-notes) — learning notes on point cloud
+  compression: representations, geometry and attribute coding, entropy models, evaluation.
 
 ## License & attribution
 
