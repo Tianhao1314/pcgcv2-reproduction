@@ -11,7 +11,7 @@
 
 ## 0. First, be clear: what counts as "a successful reproduction"
 
-Reproduction comes in three tiers, and what the advisor means by "reproduction" is almost certainly the second tier:
+Reproduction comes in three tiers. This plan targets the second tier:
 
 | Tier | Content | Goal in this plan |
 |------|------|-----------|
@@ -19,7 +19,7 @@ Reproduction comes in three tiers, and what the advisor means by "reproduction" 
 | **Tier 2: Reproduce the paper's metrics** | On the 8iVFB dataset used in the paper, produce bpp / D1 PSNR / D2 PSNR, draw the rate-distortion curve (RD curve), and confirm it basically matches the paper's figures | **Complete by Day 6 ← the bar for handing it in** |
 | Tier 3: Train from scratch | Retrain the model yourself with train.py and reach the paper's metrics | Optional, only if time allows |
 
-**Final deliverable**: a reproduction report containing ① the RD curve you produced + a comparison against the paper's curve; ② a table of key metric values; ③ environment configuration notes + pitfalls encountered. Deliver this and, as far as the advisor is concerned, the reproduction is done.
+**Final deliverable**: a reproduction report containing ① the RD curve you produced + a comparison against the paper's curve; ② a table of key metric values; ③ environment configuration notes + pitfalls encountered. Once that report exists, the reproduction is done.
 
 ---
 

@@ -25,7 +25,7 @@ At the end of each chapter there is a "**[Lock it in]**" line — that is the on
 ## Chapter 0 · Where you are now, and where you need to get
 
 My advisor assigned one task: reproduce a project on GitHub, **PCGCv2** (point cloud geometry compression).
-You followed the steps, got it running, produced results, and wrote a report — **this part you have already completed, and done well.**
+Following the steps, getting it running, producing results and writing a report — **that part is done.**
 
 But you found that you do not know what this project "is doing". The reason is not that you are slow; it is that this project sits on the top floor of a very tall building of knowledge, and what you are missing are the few foundation floors underneath. This document fills in the foundation from the bottom up.
 
