@@ -81,7 +81,7 @@ Compared with the two MPEG-standardized schemes:
 
 | Pitfall | Symptom | Remedy |
 |----|------|------|
-| pc_error output column name does not match | `KeyError: 'mseF,PSNR(p2point)'` — the code reads the value by `mseF,PSNR(p2point)`, but pc_error's actual output may have a space: `mseF,PSNR (p2point)` | This is an inconsistency between pc_error's output format and the code's parsing. When you hit it, paste the error and pc_error's actual output to me, and we just adjust the column name being parsed |
+| pc_error output column name does not match | `KeyError: 'mseF,PSNR(p2point)'` — the code reads the value by `mseF,PSNR(p2point)`, but pc_error's actual output may have a space: `mseF,PSNR (p2point)` | An inconsistency between pc_error's output format and the code's parsing. Fix: compare the error against pc_error's actual output and adjust the column name the code parses |
 
 ### B5. Training-related (Issues #2 / #3, only encountered if you do the optional Day 7)
 
@@ -124,6 +124,6 @@ python test.py --filedir='House_without_roof_00057_vox12.ply' --scaling_factor=0
 
 ## D. Pre-work self-check
 
-Once the machine is rented and connected, start from Day 1 of the *One-Week Reproduction Plan*. For any of the errors above, first self-check against this checklist; if you cannot pin it down, paste the **full error message** to me and I will help you debug it.
+Once the machine is rented and connected, start from Day 1 of the *One-Week Reproduction Plan*. For any of the errors above, work through this checklist first; when that is not enough, the **full error message** is what to search on — most of the failures below were resolved that way.
 
 The thing most likely to eat time is B1 (MinkowskiEngine) — once that is installed and working, the rest basically goes smoothly.

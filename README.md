@@ -125,7 +125,7 @@ pcgcv2-reproduction/
 ├── README.md
 ├── report/        Reproduction report — English (.docx/.pdf) and original Chinese (_zh)
 ├── figures/       rd_curve.png (RD curves), train_loss.png (training loss)
-├── docs/          Study & planning notes (translated from the author's Chinese originals)
+├── docs/          My study & planning notes (written in Chinese, translated here)
 │   ├── 7-day-reproduction-plan.md
 │   ├── pre-work-preparation.md
 │   ├── understanding-from-scratch.md

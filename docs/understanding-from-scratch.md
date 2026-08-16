@@ -1,10 +1,10 @@
-*Translated from the author's original Chinese study notes.*
+*My own study notes, written in Chinese and translated here.*
 
 # The PCGCv2 Project · Understanding It From Scratch — A Study Handbook
 
-> Written for you, someone with zero background (knows a little programming, has never studied AI).
+> Written for a reader with essentially no background in the area (some programming, no prior AI).
 > Goal: starting from the most fundamental principles of neural networks, build up layer by layer,
-> until you can understand the PCGCv2 project you reproduced, and the paper by your advisor Xiumei Li.
+> until the PCGCv2 project reproduced here — and the learned point cloud coding literature around it — makes sense.
 > Compiled: 2026-05-21
 
 ---
@@ -15,7 +15,7 @@ This document is **step-by-step**: Chapter 1 is the foundation, and each later c
 Do not skip around. On the first read, just aim to "get the intuition" — all the math can be skipped.
 
 Suggested reading approach:
-- Stage 1 (getting through the conversation with the advisor): carefully read Chapters 1, 2, 3, 5, 6, 7 + the Q&A in Chapter 9.
+- Stage 1 (enough to discuss the method with someone in the field): carefully read Chapters 1, 2, 3, 5, 6, 7 + the Q&A in Chapter 9.
 - Stage 2 (systematically filling in the basics): together with the learning path in Chapter 10, work through the videos and tutorials, then come back and re-read.
 
 At the end of each chapter there is a "**[Lock it in]**" line — that is the one sentence from this chapter you must take away.
@@ -24,7 +24,7 @@ At the end of each chapter there is a "**[Lock it in]**" line — that is the on
 
 ## Chapter 0 · Where you are now, and where you need to get
 
-Your advisor assigned you one task: reproduce a project on GitHub, **PCGCv2** (point cloud geometry compression).
+My advisor assigned one task: reproduce a project on GitHub, **PCGCv2** (point cloud geometry compression).
 You followed the steps, got it running, produced results, and wrote a report — **this part you have already completed, and done well.**
 
 But you found that you do not know what this project "is doing". The reason is not that you are slow; it is that this project sits on the top floor of a very tall building of knowledge, and what you are missing are the few foundation floors underneath. This document fills in the foundation from the bottom up.
@@ -32,7 +32,7 @@ But you found that you do not know what this project "is doing". The reason is n
 The whole building, from bottom to top, looks like this:
 
 ```
-Floor 6   The advisor's paper (end-to-end task-aware compression)   ← the destination
+Floor 6   Task-aware end-to-end compression (the target paper)      ← the destination
 Floor 5   PCGCv2 (the point cloud compression project you reproduced)
 Floor 4   Learned compression (quantization / entropy coding / hyperprior)
 Floor 3   Autoencoders (why neural networks can compress)
@@ -286,10 +286,10 @@ and see whether you can get the same numbers as the paper. Your deviation was on
 
 ---
 
-## Chapter 6 · The advisor's paper
+## Chapter 6 · The target paper
 
 Paper: **Optimized Learned Image Compression for Facial Expression Recognition**, ICIP 2025.
-Author: Xiumei Li (the advisor, first author) et al. arXiv:2509.17262.
+Xiumei Li et al., arXiv:2509.17262.
 
 ### 6.1 The problem it solves
 
@@ -321,7 +321,7 @@ It uses the AffectNet facial expression dataset (8 emotion classes). When the tw
 expression recognition accuracy +4.04%, compression rate saving 89.12% (BD-Rate);
 at low bitrates, the compressed image is even recognized slightly more accurately than the original.
 
-> **[Lock it in]** The advisor's paper = making compression not only please the human eye, but also be responsible for both "file size" and
+> **[Lock it in]** The target paper = making compression not only please the human eye, but also be responsible for both "file size" and
 > "the downstream AI task" at the same time; the method is to twist three goals into one joint loss and train them end-to-end together.
 
 ---
@@ -330,22 +330,22 @@ at low bitrates, the compressed image is even recognized slightly more accuratel
 
 Put Chapters 5 and 6 side by side:
 
-| | PCGCv2 (what you reproduced) | The advisor's paper |
+| | PCGCv2 (reproduced here) | The target paper |
 |---|---|---|
 | What it compresses | Point cloud geometry | Face images |
 | Loss function | Rate + distortion (2 terms) | Rate + distortion + **task** (3 terms) |
 | New idea | —— | Downstream-task-oriented + end-to-end joint optimization |
 
-Your advisor having you **reproduce PCGCv2 first, then read her paper** is a deliberate arrangement:
+**Reproducing PCGCv2 first and reading the target paper second** is a deliberate order:
 
-- PCGCv2 gives you the groundwork in **point cloud compression**;
-- Her paper gives you the idea of **"task-aware + end-to-end joint optimization"**.
+- PCGCv2 supplies the groundwork in **point cloud compression**;
+- the target paper supplies the idea of **"task-aware + end-to-end joint optimization"**.
 
-Now look again at the research direction on her homepage: "**scalable** learned point cloud compression, supporting decoding
-multiple quality levels from a single bitstream, oriented toward **human-machine collaborative** use"; the master's topic she supervises is "scalable point cloud compression for human-machine collaboration".
-
-**Putting it together: she most likely wants you to combine these two — to do human-machine-collaboration-oriented, task-aware point cloud compression.**
-Your upcoming research topic / internship direction is basically here.
+The wider line of work these sit in is **scalable** learned point cloud compression — decoding
+multiple quality levels from a single bitstream — oriented toward **human-machine collaborative**
+use, where the decoded cloud is consumed by a downstream task as well as by a human viewer.
+That combination, task-aware coding on top of a scalable multiscale backbone, is what the
+groundwork here is building toward.
 
 ---
 
@@ -379,7 +379,7 @@ Your upcoming research topic / internship direction is basically here.
 
 ---
 
-## Chapter 9 · Questions the advisor might ask + reference answers
+## Chapter 9 · Questions worth being able to answer + reference answers
 
 Answer along these lines, do not memorize them rote; saying it in your own words is best.
 
@@ -434,11 +434,11 @@ No need to rush; go in order, each step builds on the previous one.
 3. **A systematic course (optional)**: if you want a more solid grounding, take an introductory deep learning course (such as Andrew Ng's course).
 
 4. **Image compression background**: get to know the "learned image compression" framework of Ballé 2017/2018 —
-   your advisor's paper is built on this line of work.
+   the target paper is built on this line of work.
 
 5. **Point cloud basics**: fill in a bit on point clouds, octrees, and PSNR.
 
-6. **Re-read**: re-read PCGCv2's README and the advisor's paper. You will find you can understand them.
+6. **Re-read**: re-read PCGCv2's README and the target paper — they should now be readable.
 
 ---
 
@@ -446,4 +446,4 @@ No need to rush; go in order, each step builds on the previous one.
 
 | Date | Update content |
 |---|---|
-| 2026-05-21 | First version: Chapters 1–10, built from the fundamentals of neural networks up to the advisor's paper |
+| 2026-05-21 | First version: Chapters 1–10, built from the fundamentals of neural networks up to the target paper |

@@ -31,7 +31,7 @@ PCGCv2 depends on **MinkowskiEngine** (a sparse convolution library), which **st
 
 - Recommended spec: **RTX 3090 (24 GB VRAM)**, about ¥1.5–2.5/hour
 - Estimated total cost: about 30–40 hours of active use → **roughly ¥80–120** (remember to "shut down" to stop GPU billing when not in use)
-- Registration: https://www.autodl.com/ (you must register the account yourself; I cannot register on your behalf)
+- Registration: https://www.autodl.com/ (account registration requires real-name verification)
 
 > Tip: After an AutoDL instance is "shut down", the data disk is preserved, so the environment is still there next time you boot it. Billing only happens while the instance is running. Shut it down every day after you finish.
 
@@ -108,7 +108,7 @@ python -c "import MinkowskiEngine as ME; print(ME.__version__)"
 - `CUDA version mismatch`: confirm you are using the PyTorch build with cu111; if necessary, check that `CUDA_HOME` points to cuda-11.1.
 - Compilation fails because the GCC version is too high: `apt install gcc-9 g++-9`, then `export CC=gcc-9 CXX=g++-9` and retry.
 - Compilation hangs / out of memory: lower `MAX_JOBS` to 2.
-- Copy the error messages and send them to me; I will help you debug them one by one.
+- Keep the full error messages; work through them one at a time rather than changing several things at once.
 
 Then install torchac:
 ```bash
@@ -140,7 +140,7 @@ chmod 777 tmc3 pc_error_d
 python coder.py --filedir='longdress_vox10_1300.ply' --ckptdir='ckpts/r3_0.10bpp.pth' --scaling_factor=1.0 --rho=1.0 --res=1024
 ```
 
-> If the `mpeg-pcc-tmc13` repository is inaccessible (the MPEG repo occasionally requires permissions), tell me first and we will switch to a mirror source or another way to get tmc3 v12.
+> If the `mpeg-pcc-tmc13` repository is inaccessible (the MPEG repo occasionally requires permissions), fall back to a mirror source or another way of obtaining tmc3 v12.
 
 **Day 3 acceptance criteria (= Tier 1 "get inference running" complete)**: a compressed bitstream file and a decoded point cloud are successfully generated, with no errors throughout.
 
@@ -162,7 +162,7 @@ python test.py --filedir='longdress_vox10_1300.ply' --scaling_factor=1.0 --rho=1
 ### Day 5 — Batch testing across the whole 8iVFB dataset × multiple bitrates
 
 - For the 4 sequences of 8iVFB (longdress / loot / redandblack / soldier) × multiple bitrate models (r1–r7), batch-run test.py.
-- I will help you write a batch script that automatically iterates over all "sequence × model" combinations and collects bpp / D1 / D2 into a CSV.
+- Write a batch script that iterates over all "sequence × model" combinations and collects bpp / D1 / D2 into a CSV.
 - The `./results` directory bundled in the repo holds the authors' official test results, which can serve as a reference baseline.
 
 **Day 5 acceptance criteria**: a complete results table (CSV) covering all sequences and bitrate levels.
@@ -173,7 +173,7 @@ python test.py --filedir='longdress_vox10_1300.ply' --scaling_factor=1.0 --rho=1
 
 - With Python (matplotlib), turn the CSV into a rate-distortion curve: bpp on the x-axis, D1/D2 PSNR on the y-axis, one curve per sequence.
 - Compare it against the RD curve figures in the DCC2021 paper to see whether it basically matches (small deviations are normal).
-- I will help you write the plotting script.
+- Write the plotting script from that CSV; one curve per sequence, seven rate points each.
 
 **Day 6 acceptance criteria (= Tier 2 "reproduce the paper's metrics" complete ← the bar for handing it in)**: your curve basically overlaps the paper's curve.
 
@@ -188,7 +188,7 @@ The reproduction report should include:
 4. Problems encountered and how they were solved (especially MinkowskiEngine)
 5. Conclusion: was the reproduction successful
 
-I can help you organize this report into a Word document.
+The finished report is in `report/` (English and Chinese, Word and PDF).
 
 ---
 
@@ -208,7 +208,7 @@ I can help you organize this report into a Word document.
 
 | Risk | Probability | Response |
 |------|------|------|
-| MinkowskiEngine fails to compile | High | Follow the version combination strictly; send me errors to debug; reserve a full Day 2 |
+| MinkowskiEngine fails to compile | High | Follow the version combination strictly; reserve a full Day 2 for it |
 | tmc3 repo inaccessible / fails to compile | Medium | Switch to a mirror, or get the v12 binary another way |
 | Slow network-drive downloads / dead links | Medium | Prefer the box.nju.edu.cn direct links; fall back to Baidu Netdisk (password pcgc) |
 | Cloud GPU cost exceeds expectations | Low | Shut down immediately when not in use; a 3090 is enough, no need for a pricier card |
@@ -216,11 +216,9 @@ I can help you organize this report into a Word document.
 
 ---
 
-## 6. How I can help you
+## 6. Execution notes
 
-- For any error at any step, paste the information to me and I will help you debug it line by line.
-- The Day 5 batch testing script and the Day 6 RD plotting script — I will write them.
-- The Day 7 reproduction report — I will help you organize it into Word.
-- Note: registering the AutoDL account, topping up, entering passwords — you must do these yourself; I cannot do them for you.
-
-**Next step**: go register an account at https://www.autodl.com/. Once you are registered and have rented an instance, have the SSH login info ready, and we will start from Day 1 together.
+- For any error at any step, read the traceback line by line before changing anything — most of these failures are version mismatches, not logic bugs.
+- Day 5 needs a batch testing script and Day 6 an RD plotting script; both are small and worth writing before the GPU clock starts.
+- Day 7: write up the reproduction report, with the RD tables and the comparison against the official results.
+- Account registration, top-up and real-name verification all have to be done in person. Real-name verification is the step that failed from outside China, which is why this reproduction ended up on RunPod rather than AutoDL (see the README).
